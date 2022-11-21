@@ -1,0 +1,17 @@
+#移动界面快捷键
+move_up: tab+up
+move_down: tab+down
+move_left: tab+left
+move_right: tab+right
+
+#更换背景颜色快捷键
+change_bg: tab+backspace
+
+#退出快捷键 有时候有bug 自己去任务管理器结束
+quit: alt+q
+
+#背景颜色列表 三个都很丑，自己改去
+bg_color_list:  ['#ffccff','#3399cc','#000000']
+
+#背景透明度 0-看不见面板 1-看不见游戏 皮不皮
+bg_color_transparency: 0.5
