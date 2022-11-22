@@ -10,8 +10,11 @@ change_bg: tab+backspace
 #退出快捷键 有时候有bug 自己去任务管理器结束
 quit: alt+q
 
+#是否显示作者名，显示为1 不显示为0 填0记入作者死亡笔记
+show_coder: 1
 #背景颜色列表 三个都很丑，自己改去
 bg_color_list:  ['#ffccff','#3399cc','#000000']
 
 #背景透明度 0-看不见面板 1-看不见游戏 皮不皮
 bg_color_transparency: 0.5
+

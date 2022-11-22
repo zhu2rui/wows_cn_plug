@@ -24,7 +24,11 @@ class zaWindow(tk.Tk):
         tk.Tk.__init__(self)
         self.config_yaml = file.load_config()
         self.bgList=cycle(self.config_yaml.get('bg_color_list'))
+
         self.bg="#000000"
+        self.coderLabelColors=cycle(['#ffccff','#3399cc','#000000'])
+        self.coderLabel = tk.Label(self, text="by 为什么不办猛犸", font=('System', '10'), bg=self.bg, fg='yellow')
+        self.showCoderLabel=True
         self.x_=10
         self.y_=10
         self.geometry('+{}+{}'.format(self.x_,self.y_))
@@ -45,13 +49,13 @@ class zaWindow(tk.Tk):
         self.titleLabelList=[]
         self.dataLabelList=[]
 
-        self.data = [['舰船', '昵称', '整体胜率', '舰船胜率']
-            , ['<鹬>', '为什么不办猛犸', '58%', '59%']
-            , ['<君主>', 'sarfm', '58%', '59%']
-            , ['<东约特兰>', '墨韵线缆', '58%', '59%']
-            , ['<犬>', '逆之强袭', '58%', '59%']
-            , ['<印第安纳波利斯>', '笑死小猪', '58%', '59%']
-            , ['<抹香鲸>', '的积分开发大姐夫的京东方', '58%', '59%']]
+        # self.data = [['舰船', '昵称', '整体胜率', '舰船胜率']
+        #     , ['<鹬>', '为什么不办猛犸', '58%', '59%']
+        #     , ['<君主>', 'sarfm', '58%', '59%']
+        #     , ['<东约特兰>', '墨韵线缆', '58%', '59%']
+        #     , ['<犬>', '逆之强袭', '58%', '59%']
+        #     , ['<印第安纳波利斯>', '笑死小猪', '58%', '59%']
+        #     , ['<抹香鲸>', '的积分开发大姐夫的京东方', '58%', '59%']]
         for index,i in enumerate(self.dataTitle):
             l=tk.Label(self, text=i, font=('System', '10'), bg=self.bg,fg='yellow',width=7,anchor='w')
             l.grid(row=0,column=index,padx=4)
@@ -72,6 +76,7 @@ class zaWindow(tk.Tk):
         keyboard.add_hotkey(self.config_yaml.get('change_bg'), self.change_bg)
         #keyboard.add_hotkey(y.get('hide_hotkey'), self.withdraw)
         keyboard.add_hotkey(self.config_yaml.get('quit'),os._exit,(0,))
+        keyboard.add_hotkey(self.config_yaml.get('quit'), os._exit, (0,))
         def deiconify_():
             #time.sleep(0.05)
             try:
@@ -115,6 +120,7 @@ class zaWindow(tk.Tk):
             self.x_ += distance
         self.geometry("+{}+{}".format(self.x_,self.y_))
     def updater1(self):
+
         print("helloworld")
         def getShipNameByShipId(shipId):
             with open("outdated/shipName.json", "r", encoding='utf-8') as f:
@@ -203,8 +209,10 @@ class zaWindow(tk.Tk):
                 self.dataLabelList.append(avgShipWinRate_allies)
                 #添加敌我中间的隔断
                 for i in range(5):
-                    lbl = tk.Label(self, text="", font=('System', '10'), bg=self.bg, fg='blue')
+                    lbl = tk.Label(self, text="", font=('System', '10'), bg=self.bg, fg='yellow')
+
                     lbl.grid( column=i)
+
                     self.dataLabelList.append(lbl)
                 # 循环添加敌方数据label
                 for i_index, i in enumerate(datalist_enemies):
@@ -229,6 +237,14 @@ class zaWindow(tk.Tk):
                 avgShipWinRate_enemies.grid(row=4+len(datalist_allies)+len(datalist_enemies), column=3)
                 self.dataLabelList.append(avgWinRate_enemies)
                 self.dataLabelList.append(avgShipWinRate_enemies)
+
+                if self.config_yaml.get('show_coder')==1:
+                    empty_lbl = tk.Label(self, text="", font=('System', '10'), bg=self.bg, fg='yellow')
+                    empty_lbl.grid()
+                    self.dataLabelList.append(empty_lbl)
+                    coder_lbl = tk.Label(self, text='                        code by 为什么不办猛犸', font=('System', '10'), bg=self.bg, fg='yellow', anchor='w')
+                    coder_lbl.grid(column=1,columnspan=4)
+                    self.dataLabelList.append(coder_lbl)
 
 
 
